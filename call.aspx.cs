@@ -19,16 +19,18 @@ namespace InstanaTestApp
                 return;
             }
 
-            var targetUrl = Request.QueryString["url"]
-                         ?? System.Web.Configuration.WebConfigurationManager.AppSettings["TargetUrl"]
-                         ?? "http://httpbin.org/get";
+            string targetUrl = Request.QueryString["url"];
+            if (string.IsNullOrEmpty(targetUrl))
+                targetUrl = System.Web.Configuration.WebConfigurationManager.AppSettings["TargetUrl"];
+            if (string.IsNullOrEmpty(targetUrl))
+                targetUrl = "http://httpbin.org/get";
 
             lblUrl.Text = targetUrl;
 
             try
             {
-                var wc   = new WebClient();
-                var body = wc.DownloadString(targetUrl);
+                WebClient wc   = new WebClient();
+                string    body = wc.DownloadString(targetUrl);
                 lblStatus.Text = "200 OK";
                 lblBody.Text   = Server.HtmlEncode(body.Length > 500 ? body.Substring(0, 500) + "..." : body);
             }
