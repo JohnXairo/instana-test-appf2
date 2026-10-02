@@ -5,12 +5,8 @@ using System.Web.UI.WebControls;
 
 namespace InstanaTestApp
 {
-    public class CallPage : Page
+    public partial class CallPage : Page
     {
-        protected Label lblUrl;
-        protected Label lblStatus;
-        protected Label lblBody;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             // Simular error 500
