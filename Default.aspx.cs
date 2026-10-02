@@ -12,7 +12,7 @@ namespace InstanaTestApp
             lblClr.Text          = Environment.Version.ToString();
             lblOs.Text           = Environment.OSVersion.ToString();
             lblMachine.Text      = Environment.MachineName;
-            lblPool.Text         = Environment.GetEnvironmentVariable("APPL_MD_PATH") ?? "(no disponible)";
+            lblPool.Text         = Env("APPL_MD_PATH");
             lblCorProfiling.Text = Env("COR_ENABLE_PROFILING");
             lblProfilerGuid.Text = Env("COR_PROFILER");
             lblAgentHost.Text    = Env("INSTANA_AGENT_HOST");
@@ -21,7 +21,7 @@ namespace InstanaTestApp
 
         private string Env(string name)
         {
-            var val = Environment.GetEnvironmentVariable(name);
+            string val = Environment.GetEnvironmentVariable(name);
             return string.IsNullOrEmpty(val) ? "<no establecida>" : val;
         }
     }
